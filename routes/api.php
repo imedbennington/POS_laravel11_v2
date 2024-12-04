@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\TableController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,23 @@ Route::apiResource('admins', AdminController::class);
 Route::apiResource('providers', Provider2Controller::class);
 Route::apiResource('products', ProductController::class);
 
+//Route::apiResource('tables', TableController::class);
+Route::post('/tables/store', [TableController::class, 'store'])->name('table.store');
+/*
+// Routes for admins
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('admin/tables', [TableController::class, 'index']);
+    Route::post('admin/tables', [TableController::class, 'store']);
+    Route::put('admin/tables/{id}', [TableController::class, 'update']);
+});
+
+// Routes for waiters
+Route::middleware(['auth', 'role:waiter'])->group(function () {
+    Route::get('waiter/tables', [TableController::class, 'index']);
+    Route::post('waiter/tables', [TableController::class, 'store']);
+    Route::put('waiter/tables/{id}', [TableController::class, 'update']);
+});
+*/
 Route::get('/settings', [SettingController::class, 'edit'])->name('admin.settings.edit');
 Route::post('/settings/update', [SettingController::class, 'update'])->name('admin.settings.update');
 Route::post('/settings/store', [SettingController::class, 'store'])->name('admin.settings.store');
@@ -42,3 +60,12 @@ Route::post('orders/{orderId}/cancel', [AdminController::class, 'cancelOrder'])-
 
 
 Route::post('/order', [ProductController::class, 'order']);
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('tables', TableController::class);
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::post('tables', [TableController::class, 'store']);  // Apply middleware only for store method
+});
