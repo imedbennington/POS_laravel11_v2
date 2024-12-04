@@ -43,7 +43,7 @@ class WaiterController extends Controller
                 'days_off' => $validated['days_off'],
                 'admin_id' => $validated['admin_id'],
             ]);
-
+            $waiter->assignRole('waiter');
             return response()->json([
                 'success' => true,
                 'data' => $waiter

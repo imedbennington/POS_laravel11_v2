@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class Waiter extends User
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
     protected $table = 'waiters';
+    protected $guard_name = 'web';
 
     protected $fillable = [
         'first_name',

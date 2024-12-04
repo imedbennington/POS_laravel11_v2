@@ -45,13 +45,6 @@ class AdminController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
-        /*
-        DB::table('admins')->insert([
-            'first_name' => $validated['first_name'],
-            'last_name' => $validated['last_name'],
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
-        ]);*/
         $admin = DB::table('admins')->where('email', $validated['email'])->first();
         return response()->json($admin, Response::HTTP_CREATED);
     }
