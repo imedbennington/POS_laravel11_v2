@@ -64,7 +64,8 @@ class Provider2Controller extends Controller
                 'country' => $validated['country'],
                 'password' => bcrypt($validated['password'],), // Hash the password
                 //'admin_id' => $validated['admin_id'],
-                'admin_id' => auth()->id(), // Associate with the authenticated admin
+                'admin_id' => 1,
+                //'admin_id' => auth()->id(), // Associate with the authenticated admin
             ]);
 
             // Return a JSON response with the created provider data

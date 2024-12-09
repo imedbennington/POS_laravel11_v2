@@ -20,4 +20,9 @@ class Client extends User
     protected $hidden = [
         'password',
     ];
+
+    public function foodOrders()
+    {
+        return $this->hasMany(FoodOrder::class);
+    }
 }

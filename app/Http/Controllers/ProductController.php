@@ -204,6 +204,7 @@ class ProductController extends Controller
             ///$order = Order::create($validated);
             $order = Order::create([
                 //'admin_id' => auth('admin')->id(), // Admin who is placing the order
+                'provider_id'=>$validated['provider_id'],
                 'admin_id'=>$validated['admin_id'],
                 'product_id' => $product->id,
                 'quantity' => $validated['quantity'],
