@@ -52,4 +52,27 @@ class NotificationController extends Controller
             ], 500);
         }
     }
+
+    public function getAllNotifications()
+    {
+        try {
+            // Fetch all notifications (you can add filters if needed)
+            $notifications = AdminNotification::orderBy('created_at', 'desc')->paginate(10);
+
+            // Return the notifications
+            return response()->json([
+                'success' => true,
+                'message' => 'Notifications retrieved successfully!',
+                'data' => $notifications,
+            ], 200);
+        } catch (\Exception $e) {
+            // Log the error and return a generic error message
+            Log::error('Error retrieving notifications: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'An unexpected error occurred. Please try again later.',
+            ], 500);
+        }
+    }
 }

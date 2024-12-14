@@ -79,6 +79,8 @@ Route::post('/payment/{clientId}/{itemId}', [PaymentController::class, 'store'])
 
 //*************************notifications ******************** */
 Route::post('/notify-admin', [NotificationController::class, 'notifyAdmin'])->name('notify.admin');
+Route::get('admin/notifications', [NotificationController::class, 'getAllNotifications'])->name('admin.notifications');
+
 Route::middleware(['auth'])->group(function () {
     Route::resource('tables', TableController::class);
 });
