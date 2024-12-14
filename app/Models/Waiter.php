@@ -39,4 +39,9 @@ class Waiter extends User
     {
         return $this->belongsTo(Admin::class);
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(AdminNotification::class, 'waiter_id');
+    }
 }

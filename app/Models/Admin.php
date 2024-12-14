@@ -33,4 +33,9 @@ class Admin extends User
     {
         return $this->hasMany(Provider2::class); // Each admin manages many providers
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(AdminNotification::class);
+    }
 }

@@ -11,6 +11,8 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\FoodDrinkController;
 use App\Http\Controllers\FoodOrderController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -70,7 +72,13 @@ Route::post('/order', [ProductController::class, 'order']);
 //*************ratings******************* */
 Route::apiResource('ratings', RatingController::class);
 Route::post('/rate/{id}', [RatingController::class, 'store']);
+//***************payement********************** */
+//Route::post('/payment/{id}', [PaymentController::class, 'store'])->name('payments.store');
+Route::post('/payment/{clientId}/{itemId}', [PaymentController::class, 'store'])->name('payments.store');
 
+
+//*************************notifications ******************** */
+Route::post('/notify-admin', [NotificationController::class, 'notifyAdmin'])->name('notify.admin');
 Route::middleware(['auth'])->group(function () {
     Route::resource('tables', TableController::class);
 });

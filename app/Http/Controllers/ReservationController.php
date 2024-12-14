@@ -64,8 +64,8 @@ public function makeReservation(Request $request)
 
     // Create the reservation
     $reservation = Reservation::create([
-        //'client_id' => auth()->id(),
-        'client_id' => 1,
+        'client_id' => auth()->id(),
+        //'client_id' => 1,
         'table_id' => $table->id,
         'reservation_time' => $request->reservation_time,
         'status' => 'pending',
